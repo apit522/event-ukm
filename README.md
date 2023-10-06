@@ -7,7 +7,7 @@
  2. Cd into your project folder\
  `cd event_ukm`
  3. Install dependencies\
- `composer install`\
+ `composer install`
  4. Copy env file\
  `cp .env.staging .env`
  5. Make app key\
