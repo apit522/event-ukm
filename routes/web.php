@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UKMcontroller;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +16,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+Route::prefix('profile')->controller(UKMcontroller::class)->group(function () {
+    Route::get('/', 'index');
+    Route::middleware('auth')->group(function () {
+    });
 });

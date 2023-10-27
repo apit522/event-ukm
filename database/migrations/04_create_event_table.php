@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->text('description')->nullable();
             $table->string('location');
+            $table->integer('max_visitor');
             $table->timestamp('date');
             $table->timestamps();
 

@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::create('invoice', function (Blueprint $table) {
             $table->string('id')->primary();
             $table->unsignedBigInteger('event_id');
-            $table->string('qris_invoiceid')->unique()->nullable();
-            $table->string('qris_content')->unique()->nullable();
-            $table->integer('status')->comment('1:paid, 2:unpaid')->default(2);
+            $table->integer('last_three_value')->unique()->nullable();
+            $table->string('nama_pemilik')->unique()->nullable();
+            $table->integer('status')->comment('1:paid, 2:unpaid, 3:need confirmation')->default(2);
             $table->unsignedBigInteger('price')->nullable();
+            $table->text('detail')->nullable();
             $table->timestamps();
 
             $table->foreign('event_id')->references('id')->on('event')->onDelete('cascade');
