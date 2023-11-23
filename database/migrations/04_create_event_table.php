@@ -14,10 +14,9 @@ return new class extends Migration
         Schema::create('event', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('post_id');
-            $table->string('name')->nullable();
-            $table->text('description')->nullable();
+            $table->string('name');
+            $table->text('description');
             $table->string('location');
-            $table->integer('max_visitor');
             $table->timestamp('date');
             $table->timestamps();
 

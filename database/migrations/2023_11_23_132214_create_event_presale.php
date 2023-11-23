@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('comment', function (Blueprint $table) {
+        Schema::create('event_presale', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('post_id');
-            $table->string('profile_picture')->nullable();
-            $table->string('name');
-            $table->string('content');
+            $table->unsignedBigInteger('event_id');
+            $table->string('variant');
+            $table->float('discount');
+            $table->timestamp('due_to');
             $table->timestamps();
 
-            $table->foreign('post_id')->references('id')->on('post')->onDelete('cascade');
+            $table->foreign('event_id')->references('id')->on('event')->onDelete('cascade');
         });
     }
 
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('comment');
+        Schema::dropIfExists('event_presale');
     }
 };

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('post', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('ukm_id');
+            $table->string('judul');
             $table->string('description');
             $table->timestamps();
 

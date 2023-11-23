@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('event_id');
             $table->string('variant');
             $table->integer('price');
+            $table->integer('max_visitor');
             $table->timestamps();
 
             $table->foreign('event_id')->references('id')->on('event')->onDelete('cascade');

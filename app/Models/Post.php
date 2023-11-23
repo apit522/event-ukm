@@ -12,6 +12,7 @@ class Post extends Model
     protected $table = "post";
     protected $fillable = [
         'ukm_id',
+        'judul',
         'description'
     ];
 

@@ -17,6 +17,8 @@ return new class extends Migration
             $table->unsignedBigInteger('view')->default(0);
             $table->unsignedBigInteger('share')->default(0);
             $table->timestamps();
+
+            $table->foreign('post_id')->references('id')->on('post')->onDelete('cascade');
         });
     }
 

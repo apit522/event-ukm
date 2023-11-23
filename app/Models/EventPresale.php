@@ -5,18 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class EventPrice extends Model
+class EventPresale extends Model
 {
     use HasFactory;
-
-    protected $table = "event_price";
+    protected $table = "event_presale";
     protected $fillable = [
         'event_id',
         'variant',
-        'price',
-        'max_visitor'
+        'discount',
+        'due_to'
     ];
 
+    protected $casts = [
+        'date' => 'datetime',
+    ];
 
     public function event()
     {
