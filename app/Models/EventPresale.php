@@ -10,18 +10,21 @@ class EventPresale extends Model
     use HasFactory;
     protected $table = "event_presale";
     protected $fillable = [
-        'event_id',
+        'event_price_id',
         'variant',
         'discount',
-        'due_to'
+        'start_date',
+        'due_to',
+        'max_purchase'
     ];
 
     protected $casts = [
-        'date' => 'datetime',
+        'due_to' => 'datetime',
+        'start_date' => 'datetime',
     ];
 
-    public function event()
+    public function event_price()
     {
-        return $this->belongsTo(Event::class);
+        return $this->belongsTo(EventPrice::class);
     }
 }

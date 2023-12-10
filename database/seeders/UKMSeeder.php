@@ -20,6 +20,20 @@ class UKMSeeder extends Seeder
                 "password" => "admin12345",
                 "profile_picture" => "https://www.ukmpcc.org/assets/Logo%20PCC.png"
             ],
+            [
+                "name" => "Komunitas Seni Polines",
+                "email" => 'seni@polines.com',
+                "password" => "admin12345",
+                "profile_picture" => "https://web.polines.ac.id/wp-content/uploads/2021/12/komunitas-seni-polines.png"
+            ],
+            [
+                "name" => "Pengembangan Pengetahuan",
+                "email" => 'pp@polines.com',
+                "password" => "admin12345",
+                "profile_picture" => "https://www.ukmpp.org/wp-content/uploads/2021/07/LOGO-PP-HD-1024x1024.png"
+            ],
+
+
         ];
         foreach ($ukm as $vendor) {
             UKM::create([

@@ -13,13 +13,15 @@ return new class extends Migration
     {
         Schema::create('event_presale', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('event_id');
+            $table->unsignedBigInteger('event_price_id');
             $table->string('variant');
             $table->float('discount');
-            $table->timestamp('due_to');
+            $table->dateTime('start_date');
+            $table->dateTime('due_to');
+            $table->integer('max_purchase')->nullable();
             $table->timestamps();
 
-            $table->foreign('event_id')->references('id')->on('event')->onDelete('cascade');
+            $table->foreign('event_price_id')->references('id')->on('event_price')->onDelete('cascade');
         });
     }
 

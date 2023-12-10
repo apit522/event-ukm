@@ -22,4 +22,8 @@ class EventPrice extends Model
     {
         return $this->belongsTo(Event::class);
     }
+    public function event_price()
+    {
+        return $this->hasMany(EventPresale::class);
+    }
 }
