@@ -9,13 +9,14 @@
 </head>
 
 <body>
-
-    <livewire:counter />
-    <p>Versi Laravel saat ini: {{ app()->version() }}</p>
+    <livewire:navbar />
+    <div class="container">
+        @yield('content')
+    </div>
 
     @livewireScripts
-    <div id="disqus_thread"></div>
-    <script>
+    <!-- <div id="disqus_thread"></div> -->
+    <!-- <script>
         /**
          *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
          *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
@@ -33,7 +34,7 @@
             (d.head || d.body).appendChild(s);
         })();
     </script>
-    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> -->
 </body>
 
 </html>

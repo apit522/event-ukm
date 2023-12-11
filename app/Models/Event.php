@@ -22,6 +22,10 @@ class Event extends Model
         'date' => 'datetime',
     ];
 
+    protected $appends = [
+        'min_price',
+    ];
+
     public function post()
     {
         return $this->belongsTo(Post::class);
@@ -34,5 +38,10 @@ class Event extends Model
     public function event_presale()
     {
         return $this->hasMany(EventPresale::class);
+    }
+
+    public function getMinPriceAttribute()
+    {
+        return $this->event_price->min('price');
     }
 }
