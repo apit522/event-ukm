@@ -4,7 +4,6 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
-use Illuminate\Http\Request;
 
 class UKMcontroller extends Controller
 {
@@ -12,6 +11,12 @@ class UKMcontroller extends Controller
     {
         $data = Post::latest()->paginate(6);
 
-        return view('content.index', compact('data'));
+        $latestPosts = Post::whereHas('event')
+            ->with('event') // Menyertakan data dari relasi event
+            ->latest()
+            ->take(3)
+            ->get();
+
+        return view('content.index', compact('data', 'latestPosts'));
     }
 }
