@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('invoice', function (Blueprint $table) {
-            $table->string('id')->primary();
+            $table->id();
             $table->unsignedBigInteger('event_id');
             $table->integer('last_three_value')->unique()->nullable();
-            $table->string('nama_pemilik')->unique()->nullable();
+            $table->string('nama_pemilik')->nullable();
             $table->integer('status')->comment('1:paid, 2:unpaid, 3:need confirmation')->default(2);
             $table->unsignedBigInteger('price')->nullable();
             $table->text('detail')->nullable();

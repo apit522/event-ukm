@@ -16,6 +16,7 @@ class EventPresaleSeeder extends Seeder
         $events = [
             [
                 "event_price_id" => 1,
+                "event_id" => 1,
                 "variant" => "Presale 1",
                 "discount" => 40,
                 "start_date" => "2023-12-10 14:30:00",
@@ -24,6 +25,7 @@ class EventPresaleSeeder extends Seeder
             ],
             [
                 "event_price_id" => 2,
+                "event_id" => 1,
                 "variant" => "Presale 1",
                 "discount" => 40,
                 "start_date" => "2023-12-10 14:30:00",
@@ -32,6 +34,7 @@ class EventPresaleSeeder extends Seeder
             ],
             [
                 "event_price_id" => 1,
+                "event_id" => 1,
                 "variant" => "Presale 2",
                 "discount" => 30,
                 "start_date" => "2024-12-10 14:30:00",
@@ -40,6 +43,7 @@ class EventPresaleSeeder extends Seeder
             ],
             [
                 "event_price_id" => 2,
+                "event_id" => 1,
                 "variant" => "Presale 2",
                 "discount" => 30,
                 "start_date" => "2024-12-10 14:30:00",
@@ -48,6 +52,7 @@ class EventPresaleSeeder extends Seeder
             ],
             [
                 "event_price_id" => 1,
+                "event_id" => 1,
                 "variant" => "Sale",
                 "discount" => 0,
                 "start_date" => "2024-12-01 14:30:00",
@@ -56,6 +61,7 @@ class EventPresaleSeeder extends Seeder
             ],
             [
                 "event_price_id" => 2,
+                "event_id" => 1,
                 "variant" => "Sale",
                 "discount" => 0,
                 "start_date" => "2024-12-01 14:30:00",
@@ -64,6 +70,7 @@ class EventPresaleSeeder extends Seeder
             ],
             [
                 "event_price_id" => 3,
+                "event_id" => 2,
                 "variant" => "Sale",
                 "discount" => 0,
                 "start_date" => "2023-12-10 14:30:00",
@@ -74,6 +81,7 @@ class EventPresaleSeeder extends Seeder
         foreach ($events as $event) {
             EventPresale::create([
                 'event_price_id' => $event['event_price_id'],
+                'event_id' => $event['event_id'],
                 'variant' => $event['variant'],
                 'discount' => $event['discount'],
                 'start_date' => $event['start_date'],

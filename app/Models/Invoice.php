@@ -12,13 +12,16 @@ class Invoice extends Model
     protected $table = "invoice";
     protected $fillable = [
         'event_id',
-        'qris_content',
-        'qris_content',
+        'last_three_value',
+        'nama_pemilik',
         'status',
-        'price'
+        'price',
+        'detail'
     ];
 
-
+    protected $casts = [
+        'detail' => 'array'
+    ];
     public function event()
     {
         return $this->belongsTo(Event::class);

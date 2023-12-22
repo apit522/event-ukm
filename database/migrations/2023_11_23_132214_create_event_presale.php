@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('event_presale', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('event_price_id');
+            $table->unsignedBigInteger('event_id');
             $table->string('variant');
             $table->float('discount');
             $table->dateTime('start_date');
@@ -22,6 +23,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('event_price_id')->references('id')->on('event_price')->onDelete('cascade');
+            $table->foreign('event_id')->references('id')->on('event')->onDelete('cascade');
         });
     }
 

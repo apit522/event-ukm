@@ -21,7 +21,7 @@ class Post extends Model
         'status',
         'images',
         'ukm_name',
-        'dibuat'
+        'dibuat',
     ];
 
     public function ukm()
@@ -65,6 +65,7 @@ class Post extends Model
     {
         return $this->ukm->name;
     }
+
 
     public function getDibuatAttribute()
     {

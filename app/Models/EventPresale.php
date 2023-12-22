@@ -18,6 +18,10 @@ class EventPresale extends Model
         'max_purchase'
     ];
 
+    protected $appends = [
+        'price'
+    ];
+
     protected $casts = [
         'due_to' => 'datetime',
         'start_date' => 'datetime',
@@ -26,5 +30,14 @@ class EventPresale extends Model
     public function event_price()
     {
         return $this->belongsTo(EventPrice::class);
+    }
+    public function event()
+    {
+        return $this->belongsTo(Event::class, 'event_id');
+    }
+    public function getPriceAttribute()
+    {
+        $price = $this->event_price->price - ($this->event_price->price * $this->discount / 100);
+        return $price;
     }
 }

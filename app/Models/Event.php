@@ -35,6 +35,7 @@ class Event extends Model
     {
         return $this->hasMany(EventPrice::class);
     }
+
     public function event_presale()
     {
         return $this->hasMany(EventPresale::class);
@@ -43,5 +44,10 @@ class Event extends Model
     public function getMinPriceAttribute()
     {
         return $this->event_price->min('price');
+    }
+
+    public function getFormattedDescriptionAttribute()
+    {
+        return nl2br($this->description);
     }
 }
