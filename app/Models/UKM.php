@@ -15,7 +15,12 @@ class UKM extends Authenticatable
         'name',
         'email',
         'password',
-        'profile_picture'
+        'profile_picture',
+        'description',
+        'twitter',
+        'facebook',
+        'youtube',
+        'instagram'
     ];
 
     /**

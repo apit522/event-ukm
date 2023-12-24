@@ -63,7 +63,7 @@ class EventController extends Controller
 
         $randomNumber = mt_rand(100, 999);
         $status = ($validatedData['price'] == 0) ? 1 : 2;
-        $newPrice = floor($validatedData['price'] / 1000) * 1000 + $randomNumber;
+        $newPrice = ($status == 1) ? 0 : floor($validatedData['price'] / 1000) * 1000 + $randomNumber;
         // Mendapatkan datetime saat ini
         $now = Carbon::now();
 

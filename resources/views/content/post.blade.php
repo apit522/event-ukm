@@ -24,6 +24,7 @@
         @foreach($post->event->event_presale as $presale)
         <li>
             Variant: {{ $presale->variant }},
+            Type: {{$presale->event_price->variant}},
             Discount: {{ $presale->discount }}%,
             Start Date: {{ $presale->start_date ?? 'N/A' }},
             Due To: {{ $presale->due_to ?? 'N/A' }},
