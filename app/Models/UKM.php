@@ -13,6 +13,7 @@ class UKM extends Authenticatable
     protected $table = "UKM";
     protected $fillable = [
         'name',
+        'username',
         'email',
         'password',
         'profile_picture',
@@ -22,6 +23,10 @@ class UKM extends Authenticatable
         'youtube',
         'instagram'
     ];
+    protected $guard = 'ukm';
+    protected $appends = [
+        'post_count',
+    ];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -29,11 +34,16 @@ class UKM extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
-        'password',
+        'password', 'remember_token'
     ];
 
     public function post()
     {
-        return $this->hasMany(Post::class);
+        return $this->hasMany(Post::class, 'ukm_id');
+    }
+
+    public function getPostCountAttribute()
+    {
+        return $this->post()->count();
     }
 }

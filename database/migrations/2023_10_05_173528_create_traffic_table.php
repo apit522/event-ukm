@@ -13,12 +13,14 @@ return new class extends Migration
     {
         Schema::create('traffic', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('post_id');
-            $table->unsignedBigInteger('view')->default(0);
-            $table->unsignedBigInteger('share')->default(0);
+            $table->unsignedBigInteger('post_id')->nullable();
+            $table->unsignedBigInteger('ukm_id')->nullable();
+            $table->unsignedBigInteger('view')->nullable();
+            $table->unsignedBigInteger('share')->nullable();
             $table->timestamps();
 
-            $table->foreign('post_id')->references('id')->on('post')->onDelete('cascade');
+            $table->foreign('post_id')->references('id')->on('post')->onDelete('set null');
+            $table->foreign('ukm_id')->references('id')->on('ukm')->onDelete('set null');
         });
     }
 

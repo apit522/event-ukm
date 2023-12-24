@@ -4,9 +4,13 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
+use App\Models\UKM;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UKMcontroller extends Controller
 {
+
     public function index()
     {
         $data = Post::latest()->paginate(6);
@@ -18,5 +22,47 @@ class UKMcontroller extends Controller
             ->get();
 
         return view('content.index', compact('data', 'latestPosts'));
+    }
+
+    public function profile($id)
+    {
+        $ukm = UKM::find($id);
+        $posts = $ukm->post()->get();
+
+        return view('content.profile', compact('ukm', 'posts'));
+    }
+
+    public function showLoginForm()
+    {
+        return view('form.login');
+    }
+
+    public function login(Request $request)
+    {
+        $this->validate($request, [
+            'email' => 'required|email',
+            'password' => 'required|min:6',
+        ]);
+
+        if (auth('ukm')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
+            return redirect()->intended('/');
+        }
+
+        return redirect()->back()->withInput($request->only('email', 'remember'))->withErrors([
+            'email' => 'Invalid credentials',
+        ]);
+    }
+
+    public function logout(Request $request)
+    {
+        auth('ukm')->logout();
+
+        $request->session()->invalidate();
+
+        return redirect('/');
+    }
+    public function dashboard()
+    {
+        return 'tes';
     }
 }

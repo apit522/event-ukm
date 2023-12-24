@@ -12,12 +12,18 @@ class Traffic extends Model
     protected $table = "traffic";
     protected $fillable = [
         'post_id',
+        'ukm_id',
         'view',
         'share'
     ];
 
     public function post()
     {
-        return $this->belongsTo(Post::class);
+        return $this->belongsTo(Post::class, 'post_id');
+    }
+
+    public function ukm()
+    {
+        return $this->belongsTo(UKM::class, 'ukm_id');
     }
 }

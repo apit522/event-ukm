@@ -20,13 +20,13 @@ class Post extends Model
     protected $appends = [
         'status',
         'images',
-        'ukm_name',
+        'ukm_username',
         'dibuat',
     ];
 
     public function ukm()
     {
-        return $this->belongsTo(UKM::class);
+        return $this->belongsTo(UKM::class, 'ukm_id');
     }
     public function comment()
     {
@@ -61,9 +61,9 @@ class Post extends Model
         return $this->post_photo->pluck('file');
     }
 
-    public function getUkmNameAttribute()
+    public function getUkmUsernameAttribute()
     {
-        return $this->ukm->name;
+        return $this->ukm->username;
     }
 
 

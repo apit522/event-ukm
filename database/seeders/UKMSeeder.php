@@ -16,6 +16,7 @@ class UKMSeeder extends Seeder
         $ukm = [
             [
                 "name" => "Polytechnic Computer Club",
+                'username' => "pccpolines",
                 "email" => 'pcc@polines.com',
                 "password" => "admin12345",
                 "profile_picture" => "https://www.ukmpcc.org/assets/Logo%20PCC.png",
@@ -28,6 +29,7 @@ class UKMSeeder extends Seeder
             ],
             [
                 "name" => "Komunitas Seni Polines",
+                'username' => "konseppolines",
                 "email" => 'seni@polines.com',
                 "password" => "admin12345",
                 "profile_picture" => "https://web.polines.ac.id/wp-content/uploads/2021/12/komunitas-seni-polines.png",
@@ -40,6 +42,7 @@ class UKMSeeder extends Seeder
             [
                 "name" => "UKM Pengembangan Pengetahuan",
                 "email" => 'pp@polines.com',
+                'username' => "ukmpp",
                 "password" => "admin12345",
                 "profile_picture" => "https://www.ukmpp.org/wp-content/uploads/2021/07/LOGO-PP-HD-1024x1024.png",
                 "description" => "Science without Religion is Blind, Religion without Science is Lame.",
@@ -54,6 +57,7 @@ class UKMSeeder extends Seeder
         foreach ($ukm as $vendor) {
             UKM::create([
                 'name' => $vendor['name'],
+                'username' => $vendor['username'],
                 'email' => $vendor['email'],
                 'password' => bcrypt($vendor['password']),
                 'profile_picture' => $vendor['profile_picture'],
@@ -61,6 +65,7 @@ class UKMSeeder extends Seeder
                 'instagram' => $vendor['instagram'],
                 'facebook' => $vendor['facebook'],
                 'twitter' => $vendor['twitter'],
+                'youtube' => $vendor['youtube'],
             ]);
         }
     }

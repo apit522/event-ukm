@@ -14,8 +14,10 @@ return new class extends Migration
         Schema::create('ukm', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('username')->unique();
             $table->string('email')->unique();
             $table->string('password');
+            $table->string('remember_token')->nullable();
             $table->text('description')->nullable();
             $table->string('instagram')->nullable();
             $table->string('twitter')->nullable();

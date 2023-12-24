@@ -40,6 +40,11 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+        'ukm' => [
+            'driver' => 'session',
+            'provider' => 'ukms',
+        ],
     ],
 
     /*
@@ -69,6 +74,10 @@ return [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
+        'ukms' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\UKM::class,
+        ],
     ],
 
     /*

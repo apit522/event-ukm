@@ -9,9 +9,9 @@
     @endforeach
     <h2>Post id :{{ $post['id'] }}</h2>
     <img src="{{$post->ukm->profile_picture}}" alt="" style="width: 40vh;">
-    <p>ukm name : {{ $post['ukm_name'] }}</p>
-    <p>{{ $post['dibuat'] }}</p>
+    <p>ukm username : {{ $post['ukm_username'] }}</p>
     <p>ukm id : {{ $post->ukm->id }}</p>
+    <p>post dibuat : {{ $post['dibuat'] }}</p>
     <p>post description : {{ $post['description'] }}</p>
     @if ($post->event)
     <p>judul event : {{ $post->event->name }}</p>
