@@ -7,6 +7,16 @@ use Illuminate\Http\Request;
 
 class TrafficController extends Controller
 {
+    public function index()
+    {
+        // Simpan data ke database
+        Traffic::create([
+            'ukm_id' => 1,
+            'share' => 1,
+        ]);
+
+        return response()->json(['message' => 'Share recorded successfully']);
+    }
     public function shareUkm($ukmId)
     {
         // Simpan data ke database

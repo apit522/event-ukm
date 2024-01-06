@@ -10,10 +10,11 @@ use App\Models\Event;
 use App\Models\EventPresale;
 use Intervention\Image\Facades\Image;
 use App\Models\Invoice;
-use Barryvdh\DomPDF\PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
@@ -22,6 +23,7 @@ class EventController extends Controller
 {
     private function generateAndSendTicket($invoiceId)
     {
+        set_time_limit(300);
         $invoice = Invoice::findOrFail($invoiceId);
 
         // Generate QR code
@@ -35,10 +37,58 @@ class EventController extends Controller
         QrCode::size(300)->generate($invoiceId, $qrCodePath);
 
         // Download image using Guzzle
-        $imagePath = $invoice->event->post->images[0];
+        $imagePath = $invoice->event->post->cover_image;
 
         // Generate PDF
-        $pdf = app('dompdf.wrapper')->loadView('pdf.ticket', ['invoice' => $invoice, 'qrCodePath' => $qrCodePath, 'imagePath' => $imagePath]);
+        $pdf = Pdf::loadView('pdf.ticket', compact('invoice', 'qrCodePath', 'imagePath'));
+        // $pdf = App::make('dompdf.wrapper');
+
+        // // Load HTML ke dalam PDF
+        // $pdf->loadHTML('
+        //     <!DOCTYPE html>
+        //     <html>
+
+        //     <head>
+        //         <style>
+        //             body {
+        //                 font-family: "Arial", sans-serif;
+        //             }
+
+        //             h1 {
+        //                 color: #333;
+        //                 font-size: 24px;
+        //                 margin-bottom: 10px;
+        //             }
+
+        //             p {
+        //                 color: #555;
+        //                 font-size: 16px;
+        //                 margin-bottom: 8px;
+        //             }
+
+        //             img {
+        //                 margin-top: 20px;
+        //                 max-width: 100%;
+        //             }
+        //         </style>
+        //     </head>
+
+        //     <body>
+        //         <h1>Tiket {{ $invoice->event->name }}</h1>
+        //         <p>Nama Pemilik: {{ $invoice->nama_pemilik }}</p>
+        //         <!-- Tambahkan informasi tiket lainnya -->
+        //         <br>
+        //         <br>
+        //         <!-- Tampilkan QR code -->
+        //         <img src="' . $qrCodePath . '" alt="QR Code" width="150">
+
+        //         <!-- Tampilkan gambar -->
+        //         <img src="' . $imagePath . '" alt="Event Image" width="200">
+        //     </body>
+
+        //     </html>
+        // ');
+
 
         // Save PDF to storage (optional)
         $pdfPath = storage_path('app/public/tickets/ticket_' . $invoiceId . '.pdf');
@@ -93,7 +143,6 @@ class EventController extends Controller
         } else {
             Mail::to($validatedData['email'])->send(new InvoiceEmail($invoice));
         }
-
-        return view('form.success');
+        return view('form.success', compact('newPrice', 'nextDay'));
     }
 }

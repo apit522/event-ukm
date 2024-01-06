@@ -11,6 +11,7 @@ class EventPresale extends Model
     protected $table = "event_presale";
     protected $fillable = [
         'event_price_id',
+        'event_id',
         'variant',
         'discount',
         'start_date',

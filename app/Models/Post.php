@@ -20,6 +20,7 @@ class Post extends Model
     protected $appends = [
         'status',
         'images',
+        'cover_image',
         'ukm_username',
         'dibuat',
     ];
@@ -59,6 +60,13 @@ class Post extends Model
     public function getImagesAttribute()
     {
         return $this->post_photo->pluck('file');
+    }
+
+    public function getCoverImageAttribute()
+    {
+        $coverPhoto = $this->post_photo->where('cover', 1)->first();
+
+        return $coverPhoto ? $coverPhoto->file : null;
     }
 
     public function getUkmUsernameAttribute()

@@ -15,13 +15,18 @@ Route::controller(UKMcontroller::class)
         Route::get('/ukm/{id}', 'profile')->middleware('traffic');
         Route::post('/login', 'login');
         Route::middleware(['ukm'])->group(function () {
-            Route::get('/dashboard', 'dashboard');
+            Route::get('/dashboard', 'dashboard')->name('dashboard');
         });
     });
 
 Route::controller(PostController::class)
     ->group(function () {
         Route::get('/post/{id}', 'index')->middleware('traffic');
+        Route::middleware(['ukm'])->group(function () {
+            Route::get('/form/post', 'formShow');
+            Route::get('/form/event', 'formEventShow')->name('event.form');
+            Route::post('/form/post/submit', 'submitPost')->name('submit.post');
+        });
     });
 
 Route::controller(EventController::class)
