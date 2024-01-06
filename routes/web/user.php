@@ -35,3 +35,14 @@ Route::controller(TrafficController::class)
         Route::post('/share-ukm/{ukmId}', 'shareUkm');
         Route::post('/share-post/{postId}', 'sharePost');
     });
+
+
+
+    Route::get('/event', function () {
+        return view('content.event');
+    });
+    Route::get('/about-us', function () {
+        return view('content.about-us');
+    });
+
+

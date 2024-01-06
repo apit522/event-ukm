@@ -18,7 +18,7 @@ class UKMcontroller extends Controller
         $latestPosts = Post::whereHas('event')
             ->with('event') // Menyertakan data dari relasi event
             ->latest()
-            ->take(3)
+            ->take(1)
             ->get();
 
         return view('content.index', compact('data', 'latestPosts'));

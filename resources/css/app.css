@@ -13,3 +13,11 @@
         font-family: 'Volkhov', sans-serif;
     }
   }
+
+.h-screen-80 {
+    height: calc(100vh - 80px);
+}
+
+.w-poster{
+    width: calc((100vh - 200px) * 16 / 9);
+}
