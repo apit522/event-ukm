@@ -45,6 +45,10 @@ return [
             'driver' => 'session',
             'provider' => 'ukms',
         ],
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
     ],
 
     /*
@@ -77,6 +81,10 @@ return [
         'ukms' => [
             'driver' => 'eloquent',
             'model' => App\Models\UKM::class,
+        ],
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
         ],
     ],
 
