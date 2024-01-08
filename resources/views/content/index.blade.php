@@ -26,10 +26,32 @@
                             </button>
                         </div>
                     </div>
-                    <div class="rounded-sm h-screen-80  shadow-2xl  w-poster">
+                    @if (count($post['images']) > 1)
+                        <div
+                            class="relative h-screen-80 overflow-hidden  bg-white bg-clip-border text-gray-700 shadow-md mb-3">
+                            <div data-carousel="slide" id="default-carousel"
+                                class="relative flex flex-col max-w-[24rem] rounded-xl bg-white bg-clip-border carousel-container text-gray-700 shadow-md mb-3">
+                                <div class="relative h-screen-80 overflow-hidden">
+                                    @foreach ($post['images'] as $image)
+                                        <div data-carousel-item>
+                                            <img src="{{ $image }}" class="h-screen-80] " alt="Poster" />
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    @else
+                        <div
+                            class="relative h-screen-80  overflow-hidden  bg-white bg-clip-border text-gray-700 shadow-md mb-3">
+                            @foreach ($post['images'] as $image)
+                                <img src="{{ $image }}" class="h-screen-80" alt="Poster" />
+                            @endforeach
+                        </div>
+                    @endif
+                    {{-- <div class="rounded-sm h-screen-80  shadow-2xl  w-poster">
                         <img src="{{ $post['images'][0] }}" class="shadow-2xl h-screen-80 w-poster rounded-sm"
                             alt="">
-                    </div>
+                    </div> --}}
 
 
                 </div>
