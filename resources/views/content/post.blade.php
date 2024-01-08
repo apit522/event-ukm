@@ -1,4 +1,4 @@
-@extends('welcome')
+@extends('master')
 
 @section('content')
     <div class="bg-ungu flex flex-col justify-center">

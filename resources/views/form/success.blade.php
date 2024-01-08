@@ -1,4 +1,4 @@
-@extends('welcome')
+@extends('master')
 
 @section('content')
 @if($newPrice != 0)

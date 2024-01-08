@@ -39,6 +39,6 @@ class AdminController extends Controller
 
     public function dashboard()
     {
-        return "Berhasil Login";
+        return view('admin.dashboard');
     }
 }

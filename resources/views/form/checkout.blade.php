@@ -1,4 +1,4 @@
-@extends('welcome')
+@extends('master')
 
 @section('content')
 <div class="card p-6 bg-white shadow-md rounded-md max-w-xl mx-auto text-center py-4 my-4">
