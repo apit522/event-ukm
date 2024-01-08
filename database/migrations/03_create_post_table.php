@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('ukm_id');
             $table->string('judul');
-            $table->string('description');
+            $table->longText('description');
             $table->timestamps();
 
             $table->foreign('ukm_id')->references('id')->on('ukm')->onDelete('cascade');

@@ -1,144 +1,123 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('ukm-dashboard.master')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form Post</title>
-    <style>
-        .event-price-item,
-        .event-presale-item {
-            margin-bottom: 20px;
-            /* Atur margin sesuai kebutuhan Anda */
-        }
-    </style>
+@section('ukm-dashboard')
+<div class="container mx-auto">
+    <div class="flex justify-center">
+        <div class="w-full md:w-2/3 lg:w-1/2">
+            <div class="bg-white shadow-md rounded-md p-6">
+                <div class="text-lg font-semibold mb-4">{{ __('Create Post') }}</div>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <!-- resources/views/layouts/app.blade.php -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                <form method="POST" action="{{ route('submit.post') }}" enctype="multipart/form-data" id="post-form">
+                    @csrf
 
-</head>
-
-<body>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{{ __('Create Post') }}</div>
-
-                    <div class="card-body">
-                        <form method="POST" action="{{ route('submit.post') }}" enctype="multipart/form-data" id="post-form">
-                            @csrf
-
-                            <!-- Post Fields -->
-                            <div class="form-group">
-                                <label for="judul">Judul</label>
-                                <input type="text" name="judul" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="deskripsi">Deskripsi</label>
-                                <textarea name="deskripsi" class="form-control" required></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="photos">Photos</label>
-                                <input type="file" name="photos[]" class="form-control" id="photo-input" multiple required>
-                            </div>
-                            <!-- Checkbox Event -->
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="enable-event">
-                                <label class="form-check-label" for="enable-event">Tambah Event</label>
-                            </div>
-
-                            <!-- Submit Button -->
-                            <div class="form-group">
-                                <button type="button" class="btn btn-primary" onclick="proceedToEventForm()">Submit</button>
-                            </div>
-                        </form>
+                    <!-- Post Fields -->
+                    <div class="mb-4">
+                        <label for="judul" class="block text-sm font-medium text-gray-600">Judul</label>
+                        <input type="text" name="judul" class="mt-1 p-2 w-full border rounded-md" required>
                     </div>
-                </div>
+                    <div class="mb-4">
+                        <label for="deskripsi" class="block text-sm font-medium text-gray-600">Deskripsi</label>
+                        <textarea name="deskripsi" class="mt-1 p-2 w-full border rounded-md" required></textarea>
+                    </div>
+                    <div class="mb-4">
+                        <label for="photos" class="block text-sm font-medium text-gray-600">Photos</label>
+                        <input type="file" name="photos[]" class="mt-1 p-2 w-full border rounded-md" id="photo-input" multiple required>
+                    </div>
+
+                    <!-- Checkbox Event -->
+                    <div class="mb-4">
+                        <input type="checkbox" class="form-checkbox" id="enable-event">
+                        <label class="ml-2 text-sm text-gray-600" for="enable-event">Tambah Event</label>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="mb-4">
+                        <button type="button" class="bg-blue-500 text-white px-4 py-2 rounded-md" onclick="proceedToEventForm()">Continue</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+</div>
 
-    <script>
-        const photoInput = document.getElementById('photo-input');
+<script>
+    const photoInput = document.getElementById('photo-input');
 
-        photoInput.addEventListener('change', event => {
-            // Save the images to sessionStorage
-            const photos = event.target.files;
-            const photoDataArray = [];
+    photoInput.addEventListener('change', event => {
+        // Save the images to sessionStorage
+        const photos = event.target.files;
+        const photoDataArray = [];
 
-            for (let i = 0; i < photos.length; i++) {
-                const reader = new FileReader();
-                const photo = photos[i];
+        for (let i = 0; i < photos.length; i++) {
+            const reader = new FileReader();
+            const photo = photos[i];
 
-                reader.addEventListener('load', () => {
-                    const photoData = {
-                        name: photo.name,
-                        type: photo.type,
-                        size: photo.size,
-                        dataUrl: reader.result,
-                    };
-                    photoDataArray.push(photoData);
+            reader.addEventListener('load', () => {
+                const photoData = {
+                    name: photo.name,
+                    type: photo.type,
+                    size: photo.size,
+                    dataUrl: reader.result,
+                };
+                photoDataArray.push(photoData);
 
-                    if (photoDataArray.length === photos.length) {
-                        sessionStorage.setItem('photos', JSON.stringify(photoDataArray));
-                    }
-                });
-
-                if (photo) {
-                    reader.readAsDataURL(photo);
-                }
-            }
-        });
-
-        function proceedToEventForm() {
-
-            // Cek apakah checkbox event dicentang
-            var enableEventCheckbox = document.getElementById('enable-event');
-            if (enableEventCheckbox.checked) {
-                saveFormDataToSession('post-form', 'postFormData');
-                // Redirect ke halaman form event
-                window.location.href = "{{ route('event.form') }}";
-            } else {
-                // Jika checkbox event tidak dicentang, submit form post
-                sessionStorage.removeItem('photos');
-                document.getElementById('post-form').submit();
-            }
-        }
-
-        function saveFormDataToSession(formId, sessionKey) {
-            var formData = new FormData(document.getElementById(formId));
-            var jsonData = {};
-
-            formData.forEach(function(value, key) {
-                // Check if the value is a File object
-                if (value instanceof FileList) {
-                    // Convert the FileList to an array of File objects
-                    const files = [];
-                    for (let i = 0; i < value.length; i++) {
-                        files.push(value[i]);
-                    }
-                    jsonData[key] = files;
-                } else if (value instanceof File) {
-                    // Append the File object itself to the JSON data
-                    jsonData[key] = value;
-                } else {
-                    jsonData[key] = value;
+                if (photoDataArray.length === photos.length) {
+                    sessionStorage.setItem('photos', JSON.stringify(photoDataArray));
                 }
             });
 
-            // Append photo data to JSON data
-            const photoData = JSON.parse(sessionStorage.getItem('uploadedImages'));
-            if (photoData) {
-                jsonData['photos[]'] = photoData;
+            if (photo) {
+                reader.readAsDataURL(photo);
             }
-
-            sessionStorage.setItem(sessionKey, JSON.stringify(jsonData));
         }
-    </script>
-    <!-- <div class="container">
+    });
+
+    function proceedToEventForm() {
+
+        // Cek apakah checkbox event dicentang
+        var enableEventCheckbox = document.getElementById('enable-event');
+        if (enableEventCheckbox.checked) {
+            saveFormDataToSession('post-form', 'postFormData');
+            // Redirect ke halaman form event
+            window.location.href = "{{ route('event.form') }}";
+        } else {
+            // Jika checkbox event tidak dicentang, submit form post
+            sessionStorage.removeItem('photos');
+            document.getElementById('post-form').submit();
+        }
+    }
+
+    function saveFormDataToSession(formId, sessionKey) {
+        var formData = new FormData(document.getElementById(formId));
+        var jsonData = {};
+
+        formData.forEach(function(value, key) {
+            // Check if the value is a File object
+            if (value instanceof FileList) {
+                // Convert the FileList to an array of File objects
+                const files = [];
+                for (let i = 0; i < value.length; i++) {
+                    files.push(value[i]);
+                }
+                jsonData[key] = files;
+            } else if (value instanceof File) {
+                // Append the File object itself to the JSON data
+                jsonData[key] = value;
+            } else {
+                jsonData[key] = value;
+            }
+        });
+
+        // Append photo data to JSON data
+        const photoData = JSON.parse(sessionStorage.getItem('uploadedImages'));
+        if (photoData) {
+            jsonData['photos[]'] = photoData;
+        }
+
+        sessionStorage.setItem(sessionKey, JSON.stringify(jsonData));
+    }
+</script>
+<!-- <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
@@ -209,7 +188,7 @@
         </div>
     </div> -->
 
-    <!-- <script>
+<!-- <script>
         function toggleEventForms() {
             addEventPrice();
             var eventForms = document.getElementById('event-forms');
@@ -332,6 +311,4 @@
             eventPresaleContainer.appendChild(addEventPresaleButton);
         }
     </script> -->
-</body>
-
-</html>
+@endsection

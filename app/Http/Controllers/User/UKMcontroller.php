@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Event;
 use App\Models\Post;
 use App\Models\UKM;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class UKMcontroller extends Controller
 {
@@ -63,6 +65,24 @@ class UKMcontroller extends Controller
     }
     public function dashboard()
     {
-        return 'tes';
+        $ukm = auth('ukm')->user();
+        $postsData = $ukm->posts_data;
+        $trafficData = $postsData->pluck('traffic_count');
+        $postNames = $postsData->pluck('post_name');
+        $sharesData = $postsData->pluck('shares_count');
+        $totalTraffic = $trafficData->sum();
+        $totalShares = $sharesData->sum();
+
+        return view('ukm-dashboard.dashboard', compact('trafficData', 'postNames', 'sharesData', 'totalTraffic', 'totalShares'));
+    }
+    public function post()
+    {
+        $data = auth('ukm')->user()->post;
+        return view('ukm-dashboard.post', compact('data'));
+    }
+    public function dashboardProfile()
+    {
+
+        return view('ukm-dashboard.profile');
     }
 }

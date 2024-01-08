@@ -14,8 +14,10 @@ Route::controller(UKMcontroller::class)
         Route::post('/logout', 'logout')->name('ukm.logout');
         Route::get('/ukm/{id}', 'profile')->middleware('traffic');
         Route::post('/login', 'login');
-        Route::middleware(['ukm'])->group(function () {
-            Route::get('/dashboard', 'dashboard')->name('dashboard');
+        Route::prefix('/dashboard')->middleware(['ukm'])->group(function () {
+            Route::get('/', 'dashboard')->name('dashboard');
+            Route::get('/profile', 'dashboardProfile');
+            Route::get('/post', 'post');
         });
     });
 
@@ -43,11 +45,9 @@ Route::controller(TrafficController::class)
 
 
 
-    Route::get('/event', function () {
-        return view('content.event');
-    });
-    Route::get('/about-us', function () {
-        return view('content.about-us');
-    });
-
-
+Route::get('/event', function () {
+    return view('content.event');
+});
+Route::get('/about-us', function () {
+    return view('content.about-us');
+});

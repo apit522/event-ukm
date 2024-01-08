@@ -20,6 +20,8 @@ class Post extends Model
     protected $appends = [
         'status',
         'images',
+        'traffic_count',
+        'shares_count',
         'cover_image',
         'ukm_username',
         'dibuat',
@@ -43,7 +45,7 @@ class Post extends Model
     }
     public function traffic()
     {
-        return $this->belongsTo(Traffic::class);
+        return $this->hasMany(Traffic::class);
     }
 
     public function getStatusAttribute()
@@ -88,5 +90,15 @@ class Post extends Model
 
         // Jika belum melewati 7 hari, tampilkan diffForHumans
         return $createdDate->diffForHumans();
+    }
+
+    public function getTrafficCountAttribute()
+    {
+        return $this->traffic()->whereNotNull('view')->count();
+    }
+
+    public function getSharesCountAttribute()
+    {
+        return $this->traffic()->whereNotNull('share')->count();
     }
 }

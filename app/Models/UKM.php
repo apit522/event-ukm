@@ -26,6 +26,7 @@ class UKM extends Authenticatable
     protected $guard = 'ukm';
     protected $appends = [
         'post_count',
+        'event_count'
     ];
 
     /**
@@ -45,5 +46,28 @@ class UKM extends Authenticatable
     public function getPostCountAttribute()
     {
         return $this->post()->count();
+    }
+    public function getEventCountAttribute()
+    {
+        $number = 0;
+        foreach ($this->post as $post) {
+            if (!$post->event) {
+                break;
+            }
+            $number++;
+        }
+
+        return $number;
+    }
+
+    public function getPostsDataAttribute()
+    {
+        return $this->post->map(function ($post) {
+            return [
+                'post_name' => $post->judul,
+                'traffic_count' => $post->traffic_count,
+                'shares_count' => $post->shares_count,
+            ];
+        });
     }
 }
