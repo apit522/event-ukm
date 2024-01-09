@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Event;
 use App\Models\Post;
 use App\Models\UKM;
+use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -26,10 +27,10 @@ class UKMcontroller extends Controller
         return view('content.index', compact('data', 'latestPosts'));
     }
 
-    public function profile($id)
+    public function profile($name)
     {
-        $ukm = UKM::find($id);
-        $posts = $ukm->post()->get();
+        $ukm = UKM::where('username', $name)->first();
+        $posts = $ukm->post()->latest()->get();
 
         return view('content.profile', compact('ukm', 'posts'));
     }
@@ -84,5 +85,35 @@ class UKMcontroller extends Controller
     {
 
         return view('ukm-dashboard.profile');
+    }
+    public function updateProfile(Request $request)
+    {
+        $ukm = UKM::find(auth('ukm')->user()->id);
+
+        $ukm->name = $request->name;
+        $ukm->username = $request->username;
+        $ukm->description = $request->description;
+        $ukm->instagram = $request->instagram;
+        $ukm->facebook = $request->facebook;
+        $ukm->twitter = $request->twitter;
+        $ukm->youtube = $request->youtube;
+        $logo = $request->file('upload');
+        if ($logo) {
+            $logoPath = $logo->storePublicly('photos/ukm_logos', 'public');
+            $logoPath = url('/storage') . '/' . $logoPath;
+            if ($ukm->profile_picture) {
+                $url = $ukm->profile_picture;
+
+                $segments = explode('storage/', $url);
+                $lastSegment = end($segments);
+                if (File::exists(storage_path('app/public/' . $lastSegment))) {
+                    unlink('storage/' . $lastSegment);
+                }
+            }
+            $ukm->profile_picture = $logoPath;
+        }
+
+        $ukm->update();
+        return redirect()->intended('/dashboard/profile');
     }
 }

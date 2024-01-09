@@ -59,7 +59,10 @@ class UKM extends Authenticatable
 
         return $number;
     }
-
+    public function getFormattedDescriptionAttribute()
+    {
+        return nl2br($this->description);
+    }
     public function getPostsDataAttribute()
     {
         return $this->post->map(function ($post) {

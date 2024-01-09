@@ -12,13 +12,14 @@ Route::controller(UKMcontroller::class)
         Route::get('/', 'index');
         Route::get('/login', 'showLoginForm')->name('ukm.login');
         Route::post('/logout', 'logout')->name('ukm.logout');
-        Route::get('/ukm/{id}', 'profile')->middleware('traffic');
         Route::post('/login', 'login');
         Route::prefix('/dashboard')->middleware(['ukm'])->group(function () {
             Route::get('/', 'dashboard')->name('dashboard');
             Route::get('/profile', 'dashboardProfile');
+            Route::post('/profile/update', 'updateProfile');
             Route::get('/post', 'post');
         });
+        Route::get('/profile/{name}', 'profile')->middleware('traffic');
     });
 
 Route::controller(PostController::class)
