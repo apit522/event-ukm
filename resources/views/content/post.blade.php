@@ -12,7 +12,7 @@
                     <div class="relative h-[526px] w-[444px] overflow-hidden">
                         @foreach ($post['images'] as $image)
                         <div data-carousel-item>
-                            <img src="{{ $image }}" class="h-[526px] w-[444px] " alt="Poster" />
+                            <img src="{{ $image }}" class="h-full w-full object-contain mx-auto" alt="Poster" />
                         </div>
                         @endforeach
                     </div>
@@ -21,7 +21,7 @@
             @else
             <div class="relative h-[526px] w-[444px]  overflow-hidden rounded-sm bg-white bg-clip-border text-gray-700 shadow-md mb-3">
                 @foreach ($post['images'] as $image)
-                <img src="{{ $image }}" class="h-[526px] w-[444px]" alt="Poster" />
+                <img src="{{ $image }}" class="h-full w-full object-contain mx-auto" alt="Poster" />
                 @endforeach
             </div>
             @endif
@@ -100,26 +100,35 @@
             @else
             <div class="flex flex-col items-center">
                 @if (count($post['images']) > 1)
-                <div class="relative h-[609px] w-[486px] overflow-hidden rounded-t-xl bg-white bg-clip-border text-gray-700 shadow-md mb-3">
+                <div class="relative h-[500px] w-[444px] overflow-hidden rounded-t-xl bg-white bg-clip-border text-gray-700 shadow-md mb-3">
                     <div data-carousel="slide" id="default-carousel" class="relative flex flex-col max-w-[24rem] rounded-t-xl bg-white bg-clip-border carousel-container text-gray-700 shadow-md mb-3">
-                        <div class="relative h-[609px] w-[486px] overflow-hidden">
+                        <div class="relative h-[500px] w-[444px] overflow-hidden">
                             @foreach ($post['images'] as $image)
                             <div data-carousel-item>
-                                <img src="{{ $image }}" class="h-[617px] w-[486px] " alt="Poster" />
+                                <img src="{{ $image }}" class="h-full w-full object-contain mx-auto" alt="Poster" />
                             </div>
                             @endforeach
                         </div>
                     </div>
                 </div>
                 @else
-                <div class="relative h-[609px] w-[486px]  overflow-hidden rounded-t-xl bg-white bg-clip-border text-gray-700 shadow-md mb-3">
+                <div class="relative h-[500px] w-[444px]  overflow-hidden rounded-t-xl bg-white bg-clip-border text-gray-700 shadow-md mb-3">
                     @foreach ($post['images'] as $image)
-                    <img src="{{ $image }}" class="h-[609px] w-[486px]" alt="Poster" />
+                    <img src="{{ $image }}" class="h-full w-full object-contain mx-auto" alt="Poster" />
                     @endforeach
                 </div>
                 @endif
-                <div class="bg-white rounded-sm w-[1127px] h-[186px] mb-4 mx-auto items-center p-4">
-                    {{ $post['description'] }}
+                <div class="h-[90px] w-[444px] px-4 bg-white rounded-sm flex items-center space-x-3 mb-4">
+                    <img class="h-[40px] w-[40px]" src="{{ $post->ukm->profile_picture }}">
+                    <div class="flex flex-col">
+                        <a href="/profile/{{$post->ukm->username}}" class="text-lg font-bold">{{ $post['ukm_username'] }}</a>
+                        <p class="text-sm">{{ $post->ukm->name }}</p>
+                    </div>
+                    <p class="text-3xl ps-3">&bull;</p>
+                    <p class="text-lg">{{ $post['dibuat'] }}</p>
+                </div>
+                <div class="bg-white rounded-sm w-[444px] mb-4 mx-auto items-center p-4">
+                    {!! nl2br($post['description']) !!}
                 </div>
             </div>
             @endif

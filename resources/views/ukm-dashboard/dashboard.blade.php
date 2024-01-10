@@ -8,27 +8,7 @@
                 <div class="flex justify-between">
                     <div>
                         <h2> Saldo </h2>
-                        <p class='text-2xl font-bold'> Rp1.000.000 </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class=''>
-            <div class='text-white max-w-xs my-auto mx-auto bg-gradient-to-r from-green-900 to-green-500 p-4 py-5 px-5 rounded-xl'>
-                <div class="flex justify-between">
-                    <div>
-                        <h2> Transaksi Bulan Ini </h2>
-                        <p class='text-2xl font-bold'> Rp1.000.000 </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class=''>
-            <div class='text-white max-w-xs my-auto mx-auto bg-gradient-to-r from-red-600 to-red-400 p-4 py-5 px-5 rounded-xl'>
-                <div class="flex justify-between">
-                    <div>
-                        <h2> Transaksi Hari Ini </h2>
-                        <p class='text-2xl font-bold'> Rp1.000.000 </p>
+                        <p class='text-2xl font-bold'> Rp{{ number_format(auth('ukm')->user()->saldo, 0, ',', '.') }} </p>
                     </div>
                 </div>
             </div>

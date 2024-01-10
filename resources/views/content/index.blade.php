@@ -1,14 +1,14 @@
 @extends('master')
 
 @section('content')
-<div class="pagination justify-content-center">
-    {{ $data->links() }}
-</div>
 <div>
-    @foreach ($latestPosts as $post)
+    <div class="pagination justify-content-center">
+        {{ $data->links() }}
+    </div>
     <div class="bg-center w-full h-screen-80 bg-no-repeat bg-secondary bg-blend-multiply">
         <div class="flex flex-row items-start mx-36">
             <div class="max-w-screen-2xl lg:py-56 w-full">
+                @foreach ($latestPosts as $post)
                 <p class="text-2xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl">
                     {{ $post['judul'] }}
                 </p>
@@ -25,37 +25,20 @@
                             </button>
                         </div>
                     </div>
-                    @if (count($post['images']) > 1)
-                        <div
-                            class=" relative h-screen-80 overflow-hidden bg-white bg-clip-border text-gray-700 shadow-md mb-3">
-                            <div data-carousel="slide" id="default-carousel" class="relative flex flex-col max-w-[24rem] rounded-xl bg-white bg-clip-border carousel-container text-gray-700 shadow-md mb-3">
-                                <div class="relative h-screen-80 overflow-hidden">
-                                    @foreach ($post['images'] as $image)
-                                    <div data-carousel-item>
-                                        <img src="{{ $image }}" class="h-screen-80] " alt="Poster" />
-                                    </div>
-                                    @endforeach
-                                </div>
-                            </div>
+                   
+                <div class=" relative h-screen-80 overflow-hidden text-gray-700 shadow-md mb-3">
+                            <div class="blur-background" style="background-image: url('{{ $post['images'][0] }}'); position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; filter: blur(8px); z-index: -1;"></div>
+                            <img src="{{ $post['images'][0] }}" class="h-full w-full object-contain mx-auto" alt="Poster" />
                 </div>
-                @else
-                <div class="relative h-screen-80  overflow-hidden  bg-white bg-clip-border text-gray-700 shadow-md mb-3">
-                    @foreach ($post['images'] as $image)
-                    <img src="{{ $image }}" class="h-screen-80" alt="Poster" />
-                    @endforeach
-                </div>
-                @endif
-                {{-- <div class="rounded-sm h-screen-80  shadow-2xl  w-poster">
-                        <img src="{{ $post['images'][0] }}" class="shadow-2xl h-screen-80 w-poster rounded-sm"
-                alt="">
-            </div> --}}
+                @endforeach
 
+            </div>
 
         </div>
-        @endforeach
+
+
+
     </div>
-
-
 
 </div>
 
@@ -71,7 +54,7 @@
                         <div class="relative h-[609px] w-[486px] overflow-hidden">
                             @foreach ($post['images'] as $image)
                             <div data-carousel-item>
-                                <img src="{{ $image }}" class="h-[617px] w-[486px] " alt="Poster" />
+                                <img src="{{ $image }}" class="h-full w-full object-contain mx-auto" alt="Poster" />
                             </div>
                             @endforeach
                         </div>
@@ -80,7 +63,7 @@
                 @else
                 <div class="relative h-[609px] w-[486px]  overflow-hidden rounded-t-xl bg-white bg-clip-border text-gray-700 shadow-md mb-3">
                     @foreach ($post['images'] as $image)
-                    <img src="{{ $image }}" class="h-[609px] w-[486px]" alt="Poster" />
+                    <img src="{{ $image }}" class="h-full w-full object-contain mx-auto" alt="Poster" />
                     @endforeach
                 </div>
                 @endif
@@ -95,7 +78,7 @@
                 </div>
                 <div class="p-3">
                     <p id="excerpt" class="line-clamp-3 min-h-[3em]">
-                        {{ $post['description'] }}
+                        {!!nl2br($post->description)!!}
                     </p>
                 </div>
                 <div class="flex-grow"></div>
