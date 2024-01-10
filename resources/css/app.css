@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+/* styles.css atau di dalam tag <style> pada halaman HTML Anda */
+.active,
+.selected {
+    background-color: #4a90e2; /* Ganti dengan warna yang diinginkan */
+    color: #ffffff; /* Ganti dengan warna teks yang kontras */
+}
+
 .carousel-container {
     max-width: 600px; /* Sesuaikan dengan lebar yang diinginkan */
     margin: 0 auto; /* Agar terpusat */
@@ -21,3 +28,16 @@
 .w-poster{
     width: calc((100vh - 200px) * 16 / 9);
 }
+/* styles.css atau di dalam tag <style> pada halaman HTML Anda */
+#default-tab button {
+    background-color: #e2e8f0; /* Ganti dengan warna default tab */
+    color: #2d3748; /* Ganti dengan warna teks default tab */
+}
+
+#default-tab button.active {
+    background-color: #4299e1; /* Ganti dengan warna tab yang aktif */
+    color: #ffffff; /* Ganti dengan warna teks tab yang aktif */
+}
+
+
+

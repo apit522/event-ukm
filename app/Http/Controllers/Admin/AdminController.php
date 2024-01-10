@@ -20,7 +20,7 @@ class AdminController extends Controller
         ]);
 
         if (auth('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
-            return redirect()->intended('/admin/dashboard');
+            return redirect()->intended('/admin/transaksi');
         }
 
         return redirect()->back()->withInput($request->only('email', 'remember'))->withErrors([

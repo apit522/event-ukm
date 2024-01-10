@@ -1,22 +1,24 @@
 <div>
 
-
+    <!-- HTML Blade -->
     <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
         <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="default-tab"
             data-tabs-toggle="#default-tab-content" role="tablist">
             <li class="me-2" role="presentation">
-                <button wire:click="changeTab(2)" class="inline-block p-4 border-b-2 rounded-t-lg" id="profile-tab"
-                    data-tabs-target="#profile" type="button" role="tab" aria-controls="profile"
-                    aria-selected="true">Konfirmasi</button>
+                <button wire:click="changeTab(2)"
+                    class="inline-block p-4 border-b-2 rounded-t-lg {{ $statusCode == 2 ? 'active' : '' }}"
+                    id="profile-tab" data-tabs-target="#profile" type="button" role="tab" aria-controls="profile"
+                    aria-selected="{{ $statusCode == 2 }}">Konfirmasi</button>
             </li>
             <li class="me-2" role="presentation">
                 <button wire:click="changeTab(1)"
-                    class="inline-block p-4 border-b-2 rounded-t-lg  hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+                    class="inline-block p-4 border-b-2 rounded-t-lg {{ $statusCode == 1 ? 'active' : '' }}"
                     id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab"
-                    aria-controls="dashboard" aria-selected="false">Selesai</button>
+                    aria-controls="dashboard" aria-selected="{{ $statusCode == 1 }}">Selesai</button>
             </li>
         </ul>
     </div>
+
 
 
 

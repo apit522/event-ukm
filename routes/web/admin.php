@@ -9,6 +9,9 @@ Route::controller(AdminController::class)
         Route::post('/login', 'login')->name('admin.login');
         Route::post('/logout', 'logout');
         Route::middleware(['admin'])->group(function () {
-            Route::get('/dashboard', 'dashboard');
+            // Route::get('/dashboard', 'dashboard');
+            Route::view('/ukm', 'admin.ukm');
+            Route::view('/transaksi', 'admin.transaksi');
+
         });
     });

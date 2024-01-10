@@ -1,5 +1,6 @@
-@extends('master_admin')
+@extends('admin.master_admin')
 
 @section('content')
-    <p>transaksi</p>
+    <p class="text-center">transaksi</p>
+    <livewire:TransaksiAdmin />
 @endsection
