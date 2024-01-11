@@ -15,6 +15,7 @@ class UKM extends Authenticatable
     protected $fillable = [
         'name',
         'username',
+        'saldo',
         'email',
         'password',
         'profile_picture',

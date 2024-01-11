@@ -62,6 +62,9 @@ class TransaksiAdmin extends Component
 
         // Send email with PDF attachment
         Mail::to($invoice->detail['email'])->send(new TicketEmail($invoice, $pdfPath));
+        $ukm = $invoice->event->post->ukm;
+        $ukm->saldo += $invoice->price - 5000 - $invoice->last_three_value;
+        $ukm->update();
         session()->flash('message', 'Berhasil Approve');
         return response()->json(['message' => 'Ticket sent successfully']);
     }

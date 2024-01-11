@@ -21,7 +21,7 @@
                         Buy Ticket
                     </button>
                     <button class="bg-transparent border-ping hover:border-blue-500 text-ping font-semibold hover:text-white py-2 px-4 border hover:bg-blue-500 rounded">
-                        <a href="{{ URL::to('/post/' . $post['id']) }}"">Buy Ticket</a>
+                        <a href="{{ URL::to('/post/' . $post['id']) }}"">Detail</a>
                             </button>
                         </div>
                     </div>
