@@ -26,12 +26,13 @@ class TransaksiAdmin extends Component
 
     public function approve($postId)
     {
+        // dd("kontol");
         $post = Invoice::find($postId);
         $post->update([
             'status' => 1
 
         ]);
-        $this -> generateAndSendTicket($postId);
+        $this->generateAndSendTicket($postId);
     }
 
     private function generateAndSendTicket($invoiceId)
